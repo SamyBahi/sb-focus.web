@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: Futura, Trebuchet MS, Arial, sans-serif;
+  color: #404040;
+}
+
+.split-background {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(64, 64, 64, 0.08) 50%,
+    rgba(64, 64, 64, 0.08) 100%
+  );
+}
