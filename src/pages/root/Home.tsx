@@ -1,7 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import illustration from "../../assets/illustration.svg";
 import ButtonPrimary from "../../components/UI/ButtonPrimary";
 
 const Home = () => {
+  const navigate = useNavigate();
+  const handleAboutClick = () => {
+    navigate("/about");
+  };
   return (
     <div className="w-screen flex items-center justify-center p-20 mt-16">
       <div className="basis-2/5">
@@ -9,7 +14,7 @@ const Home = () => {
           A Handy tool for your productivity.
         </h1>
         <div className="w-1/4">
-          <ButtonPrimary>Learn more</ButtonPrimary>
+          <ButtonPrimary onClick={handleAboutClick}>Learn more</ButtonPrimary>
         </div>
       </div>
       <img

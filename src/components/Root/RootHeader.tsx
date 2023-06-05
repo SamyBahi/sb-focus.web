@@ -20,10 +20,10 @@ const RootHeader = () => {
 
   return (
     <header className="flex p-4 w-full items-center place-content-between overflow-hidden">
-      <Link to="/" className="flex items-center gap-3 cursor-pointer">
+      <a href="/" className="flex items-center gap-3 cursor-pointer">
         <img src={logo} alt="Logo" className="h-20" />
         <h1 className="text-4xl font-medium antialiased">Smay Focus.</h1>
-      </Link>
+      </a>
       {showButtons && (
         <nav className="justify-self-end">
           <ul className="flex w-64 place-content-evenly items-center">
