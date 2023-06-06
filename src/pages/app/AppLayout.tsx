@@ -2,7 +2,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import MainFooter from "../../components/MainFooter";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import AppHeader from "../../components/App/AppHeader";
+import AppHeader from "../../components/App/Header/AppHeader";
 
 const AppLayout = () => {
   const navigate = useNavigate();
@@ -10,9 +10,13 @@ const AppLayout = () => {
 
   useEffect(() => {
     if (!user) {
-      navigate("/");
+      navigate("/signin");
     }
   }, []);
+
+  if (!user) {
+    return;
+  }
 
   return (
     <div className={`flex flex-col min-h-screen`}>

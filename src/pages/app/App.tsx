@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
+import AddTaskForm from "../../components/App/Forms/AddTaskForm";
+import { MdRadioButtonUnchecked } from "react-icons/md";
 
 const App = () => {
   const navigate = useNavigate();
@@ -10,7 +12,7 @@ const App = () => {
 
   useEffect(() => {
     if (!user) {
-      navigate("/");
+      navigate("/signin");
     }
     (async () => {
       try {
@@ -30,11 +32,27 @@ const App = () => {
     })();
   }, []);
 
+  if (!user) {
+    return;
+  }
+
   return (
-    <div className="w-screen flex items-center justify-center p-20 mt-16">
-      <h1 className="text-5xl font-bold mb-10 tracking-wide leading-relaxed max-w-lg">
-        Welcome back, {user?.name}
-      </h1>
+    <div id="app-container" className="w-screen flex flex-1 bg-slate-100">
+      <div className="w-full flex-1 flex-col p-5">
+        <h1 className="text-xl font-bold tracking-wide leading-relaxed mt-5">
+          Hello, {user?.name}
+        </h1>
+        <AddTaskForm />
+        <div
+          id="task-card"
+          className="flex h-12 bg-white mt-2 rounded-md drop-shadow-lg"
+        >
+          <div id="textinput" className="flex items-center basis-1/2 text-sm">
+            <MdRadioButtonUnchecked className="text-2xl ml-5 mr-5 fill-indigo-500 cursor-pointer" />
+            <p>Salut</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

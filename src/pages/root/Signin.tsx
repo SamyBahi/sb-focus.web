@@ -4,6 +4,7 @@ import ButtonPrimary from "../../components/UI/ButtonPrimary";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
+import BaseInput from "../../components/UI/BaseInput";
 
 const Signin = () => {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ const Signin = () => {
       dispatch({ type: "LOGIN_SUCCESS", payload: response.data.user });
       navigate("/app");
     } catch (error: any) {
+      console.log(error.response);
       dispatch({ type: "LOGIN_ERROR", payload: error.response.data.message });
     }
   };
@@ -38,28 +40,27 @@ const Signin = () => {
           className="w-full flex flex-col items-center gap-3"
           onSubmit={submit}
         >
+          {error && <p className=" text-red-500">{error}</p>}
           <div className="w-1/3">
             <label htmlFor="email">Email</label>
-            <input
+            <BaseInput
               type="text"
               placeholder="Enter your email"
-              className="border-2 p-3 w-full rounded-md mt-2 focus:border-indigo-500 focus:outline-none"
               name="email"
               onChange={(e) => setEmail(e.target.value)}
-            ></input>
+            />
           </div>
           <div className="w-1/3">
             <label htmlFor="email">Password</label>
-            <input
+            <BaseInput
               type="password"
               placeholder="Enter your password"
-              className="border-2 p-3 w-full rounded-md mt-2 focus:border-indigo-500 focus:outline-none"
               name="password"
               onChange={(e) => setPassword(e.target.value)}
-            ></input>
+            ></BaseInput>
           </div>
           <div className="w-1/3 mt-5">
-            <ButtonPrimary>Sign in</ButtonPrimary>
+            <ButtonPrimary disabled={loading}>Sign in</ButtonPrimary>
           </div>
         </form>
       </div>
