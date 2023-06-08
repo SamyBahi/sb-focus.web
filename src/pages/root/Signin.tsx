@@ -1,4 +1,4 @@
-import { SyntheticEvent, useContext, useEffect, useState } from "react";
+import { SyntheticEvent, useContext, useState } from "react";
 import logo from "../../assets/logo.svg";
 import ButtonPrimary from "../../components/UI/ButtonPrimary";
 import { useNavigate } from "react-router-dom";
@@ -12,22 +12,25 @@ const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { loading, error, dispatch } = useContext(AuthContext);
+  const { loading, error, authDispatch } = useContext(AuthContext);
 
   const submit = async (e: SyntheticEvent) => {
     e.preventDefault();
-    dispatch({ type: "LOGIN_START" });
+    authDispatch({ type: "LOGIN_START" });
     try {
       const response = await axios.post(
         "http://localhost:8080/auth/login",
         { email, password },
         { withCredentials: true }
       );
-      dispatch({ type: "LOGIN_SUCCESS", payload: response.data.user });
+      authDispatch({ type: "LOGIN_SUCCESS", payload: response.data.user });
       navigate("/app");
     } catch (error: any) {
       console.log(error.response);
-      dispatch({ type: "LOGIN_ERROR", payload: error.response.data.message });
+      authDispatch({
+        type: "LOGIN_ERROR",
+        payload: error.response.data.message,
+      });
     }
   };
 

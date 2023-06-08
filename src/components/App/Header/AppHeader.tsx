@@ -10,7 +10,7 @@ const AppHeader = () => {
   const navigate = useNavigate();
 
   const [showDropDown, setShowDropDown] = useState(false);
-  const { loading, error, dispatch } = useContext(AuthContext);
+  const { loading, error, authDispatch } = useContext(AuthContext);
 
   const handleMenuClick = () => {
     setShowDropDown((prevShow) => {
@@ -25,10 +25,13 @@ const AppHeader = () => {
         {},
         { withCredentials: true }
       );
-      dispatch({ type: "LOGOUT" });
+      authDispatch({ type: "LOGOUT" });
       navigate("/");
     } catch (error: any) {
-      dispatch({ type: "LOGIN_ERROR", payload: error.response.data.message });
+      authDispatch({
+        type: "LOGIN_ERROR",
+        payload: error.response.data.message,
+      });
     }
   };
 

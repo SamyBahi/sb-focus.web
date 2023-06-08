@@ -7,7 +7,7 @@ const INITIAL_STATE = {
       : null,
   loading: false,
   error: "",
-  dispatch: (action: authActions) => {},
+  authDispatch: (action: authActions) => {},
 };
 
 interface authState {
@@ -57,7 +57,7 @@ const AuthReducer = (state: authState, action: authActions) => {
 };
 
 export const AuthContextProvider = (props: PropsWithChildren) => {
-  const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
+  const [state, authDispatch] = useReducer(AuthReducer, INITIAL_STATE);
 
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(state.user));
@@ -69,7 +69,7 @@ export const AuthContextProvider = (props: PropsWithChildren) => {
         user: state.user,
         loading: state.loading,
         error: state.error,
-        dispatch,
+        authDispatch,
       }}
     >
       {props.children}
