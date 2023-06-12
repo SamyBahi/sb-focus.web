@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import logo from "../../../assets/logo.svg";
-import { RxDotsVertical } from "react-icons/rx";
+import { RxDotsVertical } from "react-icons/rx/index";
 import { AuthContext } from "../../../context/AuthContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";

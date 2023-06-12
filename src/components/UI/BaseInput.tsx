@@ -1,8 +1,6 @@
-interface inputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  children?: React.ReactNode;
-}
+import { baseInputProps } from "../../types/componentProps";
 
-const BaseInput = (props: inputProps) => {
+const BaseInput = (props: baseInputProps) => {
   const { children, ...rest } = props;
   return (
     <input

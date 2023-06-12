@@ -1,10 +1,6 @@
-import { PropsWithChildren } from "react";
-import { Link, To } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-
-interface listItemProps extends PropsWithChildren {
-  link: To;
-}
+import { listItemProps } from "../../types/componentProps";
 
 const ListItem = (props: listItemProps) => {
   const location = useLocation();

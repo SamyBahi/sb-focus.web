@@ -5,6 +5,7 @@ const Important = () => {
     <TasksSection
       title="Important"
       important={true}
+      draggable={false}
       url={"http://localhost:8080/tasks/getImportantTasks"}
     />
   );

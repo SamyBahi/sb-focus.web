@@ -1,49 +1,11 @@
-import { Action, PayloadAction, createSlice } from "@reduxjs/toolkit";
-
-interface taskState {
-  tasks: {
-    _id: String;
-    title: String;
-    myDay: boolean;
-    important: boolean;
-    completed: boolean;
-    index: number;
-    userId: String;
-    steps: [];
-    files: [];
-    createdAt: any;
-    updatedAt: any;
-    __V: number;
-  }[];
-}
-
-interface setTasksAction extends Action {
-  payload: taskState["tasks"];
-}
-
-interface addTaskAction extends Action {
-  payload: {
-    _id: String;
-    title: String;
-    myDay: boolean;
-    important: boolean;
-    completed: boolean;
-    index: number;
-    userId: String;
-    steps: [];
-    files: [];
-    createdAt: any;
-    updatedAt: any;
-    __V: number;
-  };
-}
-
-interface updateIndexAction extends Action {
-  payload: {
-    oldIndex: number;
-    newIndex: number;
-  };
-}
+import { createSlice } from "@reduxjs/toolkit";
+import {
+  addTaskAction,
+  setTasksAction,
+  taskState,
+  actionWithId,
+  updateIndexAction,
+} from "../../types/reduxStore";
 
 const initialState = {
   tasks: [],
@@ -57,13 +19,33 @@ const tasksSlice = createSlice({
       state.tasks.unshift(action.payload);
     },
     setTasks(state: taskState, action: setTasksAction) {
-      state.tasks = action.payload
-        .slice()
-        .sort((a: any, b: any) => a.index - b.index);
+      state.tasks = action.payload;
     },
-    updateIndex(state: taskState, action: updateIndexAction) {
-      state.tasks[action.payload.oldIndex].index = action.payload.newIndex;
-      //state.tasks.slice().sort((a: any, b: any) => a.index - b.index);
+    updateIndexMyDay(state: taskState, action: updateIndexAction) {
+      state.tasks[
+        state.tasks.map((item) => item._id).indexOf(action.payload.id)
+      ].index.myDay = action.payload.newIndex;
+    },
+    updateIndexList(state: taskState, action: updateIndexAction) {
+      state.tasks[
+        state.tasks.map((item) => item._id).indexOf(action.payload.id)
+      ].index.list = action.payload.newIndex;
+    },
+    updateCompleted(state: taskState, action: actionWithId) {
+      state.tasks[
+        state.tasks.map((item) => item._id).indexOf(action.payload.id)
+      ].completed =
+        !state.tasks[
+          state.tasks.map((item) => item._id).indexOf(action.payload.id)
+        ].completed;
+    },
+    updateImportant(state: taskState, action: actionWithId) {
+      state.tasks[
+        state.tasks.map((item) => item._id).indexOf(action.payload.id)
+      ].important =
+        !state.tasks[
+          state.tasks.map((item) => item._id).indexOf(action.payload.id)
+        ].important;
     },
   },
 });

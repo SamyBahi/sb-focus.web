@@ -1,13 +1,17 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import MainFooter from "../../components/MainFooter";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import AppHeader from "../../components/App/Header/AppHeader";
 import ListsSection from "../../components/App/Sections/ListsSection";
+import { useSelector } from "react-redux";
 
 const AppLayout = () => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
+  const { showLeftMenu, showRightMenu } = useSelector(
+    (state: any) => state.menus
+  );
 
   useEffect(() => {
     if (!user) {
@@ -25,7 +29,7 @@ const AppLayout = () => {
       <AppHeader />
       <main className="flex flex-col flex-1">
         <div id="app-container" className="w-screen flex flex-1 bg-slate-100">
-          <ListsSection />
+          {showLeftMenu && <ListsSection />}
           <Outlet />
         </div>
       </main>

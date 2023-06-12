@@ -1,5 +1,10 @@
 import ListItem from "../../UI/ListItem";
-import { BsSun, BsBookmark, BsCalendar3, BsHouseDoor } from "react-icons/bs";
+import {
+  BsSun,
+  BsBookmark,
+  BsCalendar3,
+  BsHouseDoor,
+} from "react-icons/bs/index";
 
 const ListsSection = () => {
   return (

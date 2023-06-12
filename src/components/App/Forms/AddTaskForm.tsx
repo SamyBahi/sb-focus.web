@@ -1,47 +1,69 @@
-import { MdRadioButtonUnchecked } from "react-icons/md";
+import { BsCircle } from "react-icons/bs/index";
 import ButtonPrimary from "../../UI/ButtonPrimary";
 import { useDispatch, useSelector } from "react-redux";
 import { SyntheticEvent, useState } from "react";
 import { tasksActions } from "../../../store/taskSlice/tasksSlice";
 import axios from "axios";
-
-interface addTaskProps {
-  properties: {
-    myDay?: boolean;
-    important?: boolean;
-  };
-}
+import { addTaskProps } from "../../../types/componentProps";
 
 const AddTaskForm = (props: addTaskProps) => {
   const tasksDispatch = useDispatch();
   const existingTasks = useSelector((state: any) => state.tasks.tasks);
 
   const [title, setTitle] = useState("");
-  const [date, setDate] = useState("");
+  const [dueDate, setDueDate] = useState(props.dueDate ? props.dueDate : "");
 
   const handleFormSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
     console.log(title);
-
     try {
       const addedTask = await axios.post(
         "http://localhost:8080/tasks/postTask",
-        { title, ...props.properties },
+        {
+          title,
+          ...props.properties,
+          ...(dueDate && { dueDate }),
+        },
         { withCredentials: true }
       );
       await existingTasks.forEach(async (task: any) => {
-        await axios.put(
-          "http://localhost:8080/tasks/putTaskIndex/" + task._id,
-          { index: task.index + 1 },
-          { withCredentials: true }
-        );
-        console.log(task);
-        tasksDispatch(
-          tasksActions.updateIndex({
-            oldIndex: task.index,
-            newIndex: task.index + 1,
-          })
-        );
+        if (props.properties.myDay && !props.properties.listId) {
+          console.log("task index", task.index);
+          await axios.put(
+            "http://localhost:8080/tasks/putTaskIndexMyDay/" + task._id,
+            { index: task.index.myDay + 1 },
+            { withCredentials: true }
+          );
+          tasksDispatch(
+            tasksActions.updateIndexMyDay({
+              id: task._id,
+              newIndex: task.index.myDay + 1,
+            })
+          );
+          await axios.put(
+            "http://localhost:8080/tasks/putTaskIndexList/" + task._id,
+            { index: task.index.list + 1 },
+            { withCredentials: true }
+          );
+          tasksDispatch(
+            tasksActions.updateIndexList({
+              id: task._id,
+              newIndex: task.index.list + 1,
+            })
+          );
+        } else {
+          // await axios.put(
+          //   "http://localhost:8080/tasks/putTaskIndexList/" + task._id,
+          //   { index: task.index.list + 1 },
+          //   { withCredentials: true }
+          // );
+          // tasksDispatch(
+          //   tasksActions.updateIndexList({
+          //     id: task._id,
+          //     newIndex: task.index.list + 1,
+          //   })
+          // );
+        }
       });
       tasksDispatch(tasksActions.addTask(addedTask.data.task));
       setTitle("");
@@ -53,10 +75,10 @@ const AddTaskForm = (props: addTaskProps) => {
   return (
     <form
       onSubmit={handleFormSubmit}
-      className="flex flex-col h-24 bg-white mt-10 rounded-md drop-shadow-lg text-sm"
+      className="flex flex-col h-24 bg-white mt-10 rounded-md drop-shadow-md text-sm"
     >
       <div id="textinput" className="flex items-center basis-1/2">
-        <MdRadioButtonUnchecked className="text-2xl ml-5 mr-5 fill-indigo-500 cursor-pointer" />
+        <BsCircle className="text-xl ml-5 mr-5 fill-indigo-500 cursor-pointer" />
         <input
           type="text"
           placeholder="Add a task"
@@ -74,9 +96,9 @@ const AddTaskForm = (props: addTaskProps) => {
           <input
             type="date"
             className="bg-slate-100"
-            value={date}
+            value={dueDate}
             onChange={(e) => {
-              setDate(e.target.value);
+              setDueDate(e.target.value);
             }}
           ></input>
         </div>
