@@ -9,9 +9,11 @@ import { useDispatch } from "react-redux";
 import { tasksActions } from "../../store/taskSlice/tasksSlice";
 import axios from "axios";
 import { taskCardProps } from "../../types/componentProps";
+import { useNavigate } from "react-router-dom";
 
 const TaskCard = (props: taskCardProps) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleCheckClick = () => {
     dispatch(tasksActions.updateCompleted({ id: props.task.id }));
@@ -35,9 +37,13 @@ const TaskCard = (props: taskCardProps) => {
     );
   };
 
+  const handleTaskClick = () => {
+    navigate("id/" + props.task.id);
+  };
+
   return (
     <div className="flex h-12 bg-white mt-2 rounded-md drop-shadow-md items-center justify-between">
-      <div id="textinput" className="flex items-center basis-1/2 text-sm">
+      <div className="flex flex-1 h-full items-center  text-sm">
         <div>
           {!props.task.completed && (
             <BsCircle
@@ -52,15 +58,20 @@ const TaskCard = (props: taskCardProps) => {
             />
           )}
         </div>
-        <div>
-          <p className={`${props.task.completed && "line-through"}`}>
-            {props.task.title}
-          </p>
-          {props.task.dueDate && (
-            <p className="flex gap-2 text-xs opacity-80">
-              <BsCalendar3 /> Due {props.task.dueDate}
+        <div
+          className="w-full h-full hover:cursor-pointer flex items-center"
+          onClick={handleTaskClick}
+        >
+          <div>
+            <p className={`${props.task.completed && "line-through"}`}>
+              {props.task.title}
             </p>
-          )}
+            {props.task.dueDate && (
+              <p className="flex gap-2 text-xs opacity-80">
+                <BsCalendar3 /> Due {props.task.dueDate}
+              </p>
+            )}
+          </div>
         </div>
       </div>
       {!props.task.important && (

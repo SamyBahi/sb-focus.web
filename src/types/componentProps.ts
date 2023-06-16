@@ -7,7 +7,6 @@ export interface addTaskProps {
     important?: boolean;
     listId?: string;
   };
-  dueDate?: string;
 }
 
 export interface taskSectionProps {

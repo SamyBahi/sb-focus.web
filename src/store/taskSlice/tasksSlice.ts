@@ -5,10 +5,12 @@ import {
   taskState,
   actionWithId,
   updateIndexAction,
+  updateCurrentListAction,
 } from "../../types/reduxStore";
 
 const initialState = {
   tasks: [],
+  currentList: "",
 };
 
 const tasksSlice = createSlice({
@@ -46,6 +48,9 @@ const tasksSlice = createSlice({
         !state.tasks[
           state.tasks.map((item) => item._id).indexOf(action.payload.id)
         ].important;
+    },
+    updateCurrentList(state: taskState, action: updateCurrentListAction) {
+      state.currentList = action.payload;
     },
   },
 });

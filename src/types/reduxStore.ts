@@ -21,6 +21,7 @@ export interface taskState {
     dueDate?: Date;
     note?: String;
   }[];
+  currentList: string;
 }
 
 export interface menuState {
@@ -32,6 +33,9 @@ export interface setTasksAction extends Action {
   payload: taskState["tasks"];
 }
 
+export interface updateCurrentListAction extends Action {
+  payload: string;
+}
 export interface addTaskAction extends Action {
   payload: {
     _id: String;

@@ -11,10 +11,11 @@ import { AuthContextProvider } from "./context/AuthContext";
 import AppLayout from "./pages/app/AppLayout";
 import store from "./store";
 import { Provider } from "react-redux";
-import MyDay from "./pages/app/MyDay";
-import Important from "./pages/app/Important";
-import Planned from "./pages/app/Planned";
-import Inbox from "./pages/app/Inbox";
+import MyDay, { myDayLoader } from "./pages/app/MyDay";
+import Important, { importantLoader } from "./pages/app/Important";
+import Planned, { plannedLoader } from "./pages/app/Planned";
+import Inbox, { inboxLoader } from "./pages/app/Inbox";
+import TaskDetails from "./pages/app/TaskDetails";
 
 const router = createBrowserRouter([
   {
@@ -31,10 +32,11 @@ const router = createBrowserRouter([
     path: "/app",
     element: <AppLayout />,
     children: [
-      { path: "myday", element: <MyDay /> },
-      { path: "important", element: <Important /> },
-      { path: "planned", element: <Planned /> },
-      { path: "inbox", element: <Inbox /> },
+      { path: "myday", element: <MyDay />, loader: myDayLoader },
+      { path: "important", element: <Important />, loader: importantLoader },
+      { path: "planned", element: <Planned />, loader: plannedLoader },
+      { path: "inbox", element: <Inbox />, loader: inboxLoader },
+      { path: "id/:taskId", element: <TaskDetails /> },
     ],
   },
 ]);

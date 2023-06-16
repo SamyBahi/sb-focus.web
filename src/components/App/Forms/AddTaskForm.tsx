@@ -1,7 +1,7 @@
 import { BsCircle } from "react-icons/bs/index";
 import ButtonPrimary from "../../UI/ButtonPrimary";
 import { useDispatch, useSelector } from "react-redux";
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import { tasksActions } from "../../../store/taskSlice/tasksSlice";
 import axios from "axios";
 import { addTaskProps } from "../../../types/componentProps";
@@ -9,9 +9,20 @@ import { addTaskProps } from "../../../types/componentProps";
 const AddTaskForm = (props: addTaskProps) => {
   const tasksDispatch = useDispatch();
   const existingTasks = useSelector((state: any) => state.tasks.tasks);
+  const currentList: string = useSelector(
+    (state: any) => state.tasks.currentList
+  );
 
   const [title, setTitle] = useState("");
-  const [dueDate, setDueDate] = useState(props.dueDate ? props.dueDate : "");
+  const [dueDate, setDueDate] = useState("");
+
+  useEffect(() => {
+    setDueDate(
+      currentList.toLowerCase() === "planned"
+        ? new Date().toISOString().slice(0, 10)
+        : ""
+    );
+  }, [currentList]);
 
   const handleFormSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
@@ -28,7 +39,6 @@ const AddTaskForm = (props: addTaskProps) => {
       );
       await existingTasks.forEach(async (task: any) => {
         if (props.properties.myDay && !props.properties.listId) {
-          console.log("task index", task.index);
           await axios.put(
             "http://localhost:8080/tasks/putTaskIndexMyDay/" + task._id,
             { index: task.index.myDay + 1 },
