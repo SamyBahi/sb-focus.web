@@ -24,14 +24,8 @@ export interface baseInputProps
 }
 
 export interface taskCardProps {
-  task: {
-    title: String;
-    completed: boolean;
-    important: boolean;
-    dueDate?: string;
-    id: string;
-    index: number;
-  };
+  taskId: string;
+  draggable: boolean;
 }
 
 export interface buttonProps

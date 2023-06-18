@@ -8,7 +8,7 @@ const RootHeader = () => {
   const location = useLocation();
 
   const showButtons =
-    location.pathname === "/" || location.pathname === "/about";
+    location.pathname !== "/signin" && location.pathname !== "/signup";
 
   const signupClickHandler = () => {
     navigate("/signup");

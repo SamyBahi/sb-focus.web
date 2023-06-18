@@ -1,17 +1,23 @@
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import DeleteTaskForm from "../Forms/DeleteTaskForm";
+import TaskDueDateForm from "../Forms/TaskDueDateForm";
+import TaskHeaderForm from "../Forms/TaskHeaderForm";
+import TaskMyDayForm from "../Forms/TaskMyDayForm";
 
 const DetailsSection = () => {
-  const taskId = useParams().taskId;
-
-  const TaskDetails = useSelector((state: any) =>
-    state.tasks.tasks.find((task: any) => task._id === taskId)
-  );
-
-  console.log(TaskDetails);
-
   return (
-    <div id="taskListSection" className="w-72 bg-white drop-shadow-md"></div>
+    <div
+      id="taskListSection"
+      className="w-80 bg-slate-50 drop-shadow-md p-3 flex flex-col justify-between"
+    >
+      <div>
+        <TaskHeaderForm />
+        <TaskMyDayForm />
+        <TaskDueDateForm />
+      </div>
+      <div className="flex items-center justify-end">
+        <DeleteTaskForm />
+      </div>
+    </div>
   );
 };
 

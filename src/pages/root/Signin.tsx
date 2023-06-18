@@ -5,6 +5,15 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
 import BaseInput from "../../components/UI/BaseInput";
+import { z } from "zod";
+import { toast } from "react-toastify";
+
+const LoginSchema = z.object({
+  email: z.string().email({ message: "Please enter a valid email." }),
+  password: z.string().nonempty({ message: "Please enter a valid password." }),
+});
+
+type Login = z.infer<typeof LoginSchema>;
 
 const Signin = () => {
   const navigate = useNavigate();
@@ -18,6 +27,22 @@ const Signin = () => {
     e.preventDefault();
     authDispatch({ type: "LOGIN_START" });
     try {
+      const loginInfo: Login = {
+        email,
+        password,
+      };
+
+      const validationResult = LoginSchema.safeParse(loginInfo);
+
+      if (!validationResult.success) {
+        authDispatch({
+          type: "LOGIN_ERROR",
+          payload: validationResult.error.issues[0].message,
+        });
+        toast.error(validationResult.error.issues[0].message);
+        return;
+      }
+
       const response = await axios.post(
         "http://localhost:8080/auth/login",
         { email, password },
@@ -26,11 +51,11 @@ const Signin = () => {
       authDispatch({ type: "LOGIN_SUCCESS", payload: response.data.user });
       navigate("/app");
     } catch (error: any) {
-      console.log(error.response);
       authDispatch({
         type: "LOGIN_ERROR",
         payload: error.response.data.message,
       });
+      toast.error(error.response.data.message);
     }
   };
 
@@ -43,7 +68,6 @@ const Signin = () => {
           className="w-full flex flex-col items-center gap-3"
           onSubmit={submit}
         >
-          {error && <p className=" text-red-500">{error}</p>}
           <div className="w-1/3">
             <label htmlFor="email">Email</label>
             <BaseInput
@@ -63,7 +87,11 @@ const Signin = () => {
             ></BaseInput>
           </div>
           <div className="w-1/3 mt-5">
-            <ButtonPrimary disabled={loading}>Sign in</ButtonPrimary>
+            <ButtonPrimary
+              disabled={loading || email.length === 0 || password.length === 0}
+            >
+              Sign in
+            </ButtonPrimary>
           </div>
         </form>
       </div>

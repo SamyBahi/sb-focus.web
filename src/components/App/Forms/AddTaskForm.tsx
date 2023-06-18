@@ -1,14 +1,24 @@
 import { BsCircle } from "react-icons/bs/index";
 import ButtonPrimary from "../../UI/ButtonPrimary";
 import { useDispatch, useSelector } from "react-redux";
-import { SyntheticEvent, useEffect, useState } from "react";
+import { SyntheticEvent, useContext, useEffect, useState } from "react";
 import { tasksActions } from "../../../store/taskSlice/tasksSlice";
 import axios from "axios";
 import { addTaskProps } from "../../../types/componentProps";
+import { z } from "zod";
+import { toast } from "react-toastify";
+import { AuthContext } from "../../../context/AuthContext";
+
+const TaskSchema = z.object({
+  title: z.string().nonempty({ message: "Please enter a valid task title." }),
+});
+
+type Task = z.infer<typeof TaskSchema>;
 
 const AddTaskForm = (props: addTaskProps) => {
   const tasksDispatch = useDispatch();
-  const existingTasks = useSelector((state: any) => state.tasks.tasks);
+  const { authDispatch } = useContext(AuthContext);
+  const existingTasks = useSelector((state: any) => state.tasks.currentTasks);
   const currentList: string = useSelector(
     (state: any) => state.tasks.currentList
   );
@@ -26,8 +36,18 @@ const AddTaskForm = (props: addTaskProps) => {
 
   const handleFormSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
-    console.log(title);
     try {
+      const taskInfos: Task = {
+        title,
+      };
+
+      const validationResult = TaskSchema.safeParse(taskInfos);
+
+      if (!validationResult.success) {
+        toast.error(validationResult.error.issues[0].message);
+        return;
+      }
+
       const addedTask = await axios.post(
         "http://localhost:8080/tasks/postTask",
         {
@@ -76,16 +96,23 @@ const AddTaskForm = (props: addTaskProps) => {
         }
       });
       tasksDispatch(tasksActions.addTask(addedTask.data.task));
+      tasksDispatch(tasksActions.setCurrentTasks(currentList));
       setTitle("");
     } catch (error: any) {
-      console.log(error.response.message);
+      if (error.response.status === 401) {
+        return authDispatch({ type: "LOGOUT" });
+      }
+      toast.error(
+        error.response.status +
+          " Something went wrong ! Please try again later."
+      );
     }
   };
 
   return (
     <form
       onSubmit={handleFormSubmit}
-      className="flex flex-col h-24 bg-white mt-10 rounded-md drop-shadow-md text-sm"
+      className="flex flex-col h-24 bg-white mt-10 rounded-md drop-shadow-md text-sm mx-5 z-10"
     >
       <div id="textinput" className="flex items-center basis-1/2">
         <BsCircle className="text-xl ml-5 mr-5 fill-indigo-500 cursor-pointer" />
@@ -113,7 +140,9 @@ const AddTaskForm = (props: addTaskProps) => {
           ></input>
         </div>
         <div className="flex items-center w-14 text-xs">
-          <ButtonPrimary type="submit">Add</ButtonPrimary>
+          <ButtonPrimary type="submit" disabled={title.length === 0}>
+            Add
+          </ButtonPrimary>
         </div>
       </div>
     </form>

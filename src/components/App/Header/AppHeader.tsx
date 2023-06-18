@@ -36,7 +36,7 @@ const AppHeader = () => {
   };
 
   return (
-    <header className="flex p-2 w-full items-center place-content-between overflow-hidden border-b-2 border-b-indigo-500">
+    <header className="flex h-[6%] p-2 w-full items-center place-content-between border-b-2 border-b-indigo-500">
       <a href="/" className="flex items-center gap-3 cursor-pointer ">
         <img src={logo} alt="Logo" className="h-5" />
         <h1 className="text-xl font-medium antialiased">Smay Focus.</h1>

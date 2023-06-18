@@ -6,11 +6,16 @@ import {
   actionWithId,
   updateIndexAction,
   updateCurrentListAction,
+  updateTitleAction,
+  updateTaskMyDayAction,
+  task,
+  updateTaskDueDateAction,
 } from "../../types/reduxStore";
 
 const initialState = {
   tasks: [],
   currentList: "",
+  currentTasks: [],
 };
 
 const tasksSlice = createSlice({
@@ -22,6 +27,30 @@ const tasksSlice = createSlice({
     },
     setTasks(state: taskState, action: setTasksAction) {
       state.tasks = action.payload;
+    },
+    setCurrentTasks(state: taskState, action: updateCurrentListAction) {
+      switch (action.payload) {
+        case "myday":
+          state.currentTasks = state.tasks.filter((task: task) => task.myDay);
+          break;
+        case "Important":
+          state.currentTasks = state.tasks.filter(
+            (task: task) => task.important
+          );
+          break;
+        case "Planned":
+          state.currentTasks = state.tasks.filter((task: task) => task.dueDate);
+          break;
+        case "Inbox":
+          state.currentTasks = state.tasks.filter((task: task) => !task.listId);
+          break;
+        default:
+          state.currentTasks = state.tasks.filter((task: task) => task.listId);
+          break;
+      }
+    },
+    updateCurrentList(state: taskState, action: updateCurrentListAction) {
+      state.currentList = action.payload;
     },
     updateIndexMyDay(state: taskState, action: updateIndexAction) {
       state.tasks[
@@ -49,8 +78,28 @@ const tasksSlice = createSlice({
           state.tasks.map((item) => item._id).indexOf(action.payload.id)
         ].important;
     },
-    updateCurrentList(state: taskState, action: updateCurrentListAction) {
-      state.currentList = action.payload;
+    updateTaskTitle(state: taskState, action: updateTitleAction) {
+      state.tasks[
+        state.tasks.map((item) => item._id).indexOf(action.payload.id)
+      ].title = action.payload.newTitle;
+    },
+    updateTaskMyDay(state: taskState, action: updateTaskMyDayAction) {
+      state.tasks[
+        state.tasks.map((item) => item._id).indexOf(action.payload.id)
+      ].myDay = action.payload.myDay;
+    },
+    updateTaskDueDate(state: taskState, action: updateTaskDueDateAction) {
+      state.tasks[
+        state.tasks.map((item) => item._id).indexOf(action.payload.id)
+      ].dueDate = action.payload.dueDate;
+    },
+    deleteTask(state: taskState, action: actionWithId) {
+      state.currentTasks = state.currentTasks.filter(
+        (task) => task._id !== action.payload.id
+      );
+      state.tasks = state.tasks.filter(
+        (task) => task._id !== action.payload.id
+      );
     },
   },
 });

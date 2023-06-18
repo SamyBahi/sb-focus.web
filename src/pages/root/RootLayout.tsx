@@ -3,6 +3,8 @@ import MainFooter from "../../components/MainFooter";
 import RootHeader from "../../components/Root/RootHeader";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 const RootLayout = () => {
   const location = useLocation();
@@ -24,6 +26,18 @@ const RootLayout = () => {
         splitScreenColors && "split-background"
       }`}
     >
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <RootHeader />
       <main className="flex flex-col flex-1">
         <Outlet />
