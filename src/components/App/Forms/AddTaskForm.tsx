@@ -112,7 +112,7 @@ const AddTaskForm = (props: addTaskProps) => {
   return (
     <form
       onSubmit={handleFormSubmit}
-      className="flex flex-col h-24 bg-white mt-10 rounded-md drop-shadow-md text-sm mx-5 z-10"
+      className="flex flex-col h-32 bg-white mt-10 rounded-md drop-shadow-md text-sm mx-5 z-10"
     >
       <div id="textinput" className="flex items-center basis-1/2">
         <BsCircle className="text-xl ml-5 mr-5 fill-indigo-500 cursor-pointer" />

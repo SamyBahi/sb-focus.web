@@ -10,6 +10,7 @@ import {
   updateTaskMyDayAction,
   task,
   updateTaskDueDateAction,
+  updateTaskNoteAction,
 } from "../../types/reduxStore";
 
 const initialState = {
@@ -92,6 +93,11 @@ const tasksSlice = createSlice({
       state.tasks[
         state.tasks.map((item) => item._id).indexOf(action.payload.id)
       ].dueDate = action.payload.dueDate;
+    },
+    updateTaskNote(state: taskState, action: updateTaskNoteAction) {
+      state.tasks[
+        state.tasks.map((item) => item._id).indexOf(action.payload.id)
+      ].note = action.payload.newNote;
     },
     deleteTask(state: taskState, action: actionWithId) {
       state.currentTasks = state.currentTasks.filter(

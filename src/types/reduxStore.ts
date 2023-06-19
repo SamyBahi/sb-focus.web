@@ -73,6 +73,13 @@ export interface updateTitleAction extends Action {
   };
 }
 
+export interface updateTaskNoteAction extends Action {
+  payload: {
+    id: string;
+    newNote: string;
+  };
+}
+
 export interface updateTaskMyDayAction extends Action {
   payload: {
     id: string;

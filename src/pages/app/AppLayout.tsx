@@ -51,7 +51,7 @@ const AppLayout = () => {
         theme="light"
       />
       <AppHeader />
-      <main className="flex h-[94%] w-screen bg-slate-100">
+      <main className="flex h-[calc(100%-5rem)] w-screen bg-slate-100">
         {showLeftMenu && <ListsSection />}
         <TasksSection />
         <Outlet />

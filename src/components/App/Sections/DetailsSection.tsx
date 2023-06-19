@@ -2,6 +2,7 @@ import DeleteTaskForm from "../Forms/DeleteTaskForm";
 import TaskDueDateForm from "../Forms/TaskDueDateForm";
 import TaskHeaderForm from "../Forms/TaskHeaderForm";
 import TaskMyDayForm from "../Forms/TaskMyDayForm";
+import TaskNoteForm from "../Forms/TaskNoteForm";
 
 const DetailsSection = () => {
   return (
@@ -13,6 +14,7 @@ const DetailsSection = () => {
         <TaskHeaderForm />
         <TaskMyDayForm />
         <TaskDueDateForm />
+        <TaskNoteForm />
       </div>
       <div className="flex items-center justify-end">
         <DeleteTaskForm />
