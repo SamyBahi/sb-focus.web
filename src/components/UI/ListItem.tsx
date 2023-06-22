@@ -15,7 +15,10 @@ const ListItem = (props: listItemProps) => {
             : "hover:bg-slate-200"
         }`}
       >
-        <h5 className="flex items-center gap-4">{props.children}</h5>
+        <div className="flex justify-between items-center">
+          <div className="flex gap-4 items-center">{props.children}</div>
+          <span className="text-sm">{props.amount}</span>
+        </div>
       </li>
     </Link>
   );

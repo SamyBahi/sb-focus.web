@@ -34,7 +34,7 @@ const AppLayout = () => {
   }
 
   return (
-    <div className="h-full">
+    <div className="h-full overflow-hidden">
       <ToastContainer
         position="top-center"
         autoClose={5000}

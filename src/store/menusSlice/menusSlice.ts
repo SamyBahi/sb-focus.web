@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { menuState } from "../../types/reduxStore";
 
 const initialState = {
-  showLeftMenu: true,
+  showLeftMenu: false,
 };
 
 const menusSlice = createSlice({

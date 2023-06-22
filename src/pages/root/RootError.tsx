@@ -29,7 +29,7 @@ const RootError = () => {
     <div className={`flex flex-col min-h-screen`}>
       <RootHeader />
       <main className="flex flex-col flex-1 items-center">
-        <h1 className="text-4xl">Something went wrong !</h1>
+        <h1 className="text-3xl">Something went wrong !</h1>
         {content}
       </main>
       <MainFooter />

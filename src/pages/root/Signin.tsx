@@ -61,14 +61,14 @@ const Signin = () => {
 
   return (
     <div className="flex flex-1 w-screen">
-      <div className="basis-1/2 flex items-center justify-center">
+      <div className="flex-1 xl:basis-1/2 flex items-center justify-center">
         <form
           action=""
           method="POST"
           className="w-full flex flex-col items-center gap-3"
           onSubmit={submit}
         >
-          <div className="w-1/3">
+          <div className="w-3/4 md:w-1/3">
             <label htmlFor="email">Email</label>
             <BaseInput
               type="text"
@@ -77,7 +77,7 @@ const Signin = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div className="w-1/3">
+          <div className="w-3/4 md:w-1/3">
             <label htmlFor="email">Password</label>
             <BaseInput
               type="password"
@@ -86,7 +86,7 @@ const Signin = () => {
               onChange={(e) => setPassword(e.target.value)}
             ></BaseInput>
           </div>
-          <div className="w-1/3 mt-5">
+          <div className="w-3/4 md:w-1/3 mt-5">
             <ButtonPrimary
               disabled={loading || email.length === 0 || password.length === 0}
             >
@@ -95,7 +95,7 @@ const Signin = () => {
           </div>
         </form>
       </div>
-      <div className="basis-1/2 flex items-center justify-center">
+      <div className="hidden xl:basis-1/2 xl:flex xl:items-center xl:justify-center">
         <img src={logo} alt="big logo" className="h-80" />
       </div>
     </div>

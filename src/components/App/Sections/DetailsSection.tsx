@@ -18,7 +18,7 @@ const DetailsSection = () => {
   return (
     <div
       id="taskListSection"
-      className="w-80 bg-slate-50 drop-shadow-md p-3 flex flex-col justify-between"
+      className="w-full md:w-80 bg-slate-50 drop-shadow-md p-3 flex flex-col justify-between absolute top-20 h-[calc(100%-5rem)]  z-20 right-0 md:bg-slate-50/80 xl:static xl:h-auto xl:bg-slate-50"
     >
       <div>
         <TaskHeaderForm />
