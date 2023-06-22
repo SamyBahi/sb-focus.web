@@ -5,7 +5,8 @@ const Inbox = () => {
   const reduxDispatch = useDispatch();
 
   useEffect(() => {
-    reduxDispatch(tasksActions.updateCurrentList("Inbox"));
+    reduxDispatch(tasksActions.updateCurrentList("inbox"));
+    reduxDispatch(tasksActions.updateCurrentListTitle("Tasks"));
   });
 
   return null;

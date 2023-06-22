@@ -6,7 +6,6 @@ import AppHeader from "../../components/App/Header/AppHeader";
 import ListsSection from "../../components/App/Sections/ListsSection";
 import { useDispatch, useSelector } from "react-redux";
 import TasksSection from "../../components/App/Sections/TaskSection";
-import DetailsSection from "../../components/App/Sections/DetailsSection";
 import { useLoaderData } from "react-router-dom";
 import { taskState } from "../../types/reduxStore";
 import axios from "axios";
@@ -18,9 +17,7 @@ const AppLayout = () => {
   const reduxDispatch = useDispatch();
   const { user } = useContext(AuthContext);
   const tasks = useLoaderData() as taskState["tasks"];
-  const { showLeftMenu, showRightMenu } = useSelector(
-    (state: any) => state.menus
-  );
+  const { showLeftMenu } = useSelector((state: any) => state.menus);
 
   useEffect(() => {
     if (!user) {

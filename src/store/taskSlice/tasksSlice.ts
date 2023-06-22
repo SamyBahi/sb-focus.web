@@ -16,6 +16,7 @@ import {
 const initialState = {
   tasks: [],
   currentList: "",
+  currentListTitle: "",
   currentTasks: [],
 };
 
@@ -34,15 +35,15 @@ const tasksSlice = createSlice({
         case "myday":
           state.currentTasks = state.tasks.filter((task: task) => task.myDay);
           break;
-        case "Important":
+        case "important":
           state.currentTasks = state.tasks.filter(
             (task: task) => task.important
           );
           break;
-        case "Planned":
+        case "planned":
           state.currentTasks = state.tasks.filter((task: task) => task.dueDate);
           break;
-        case "Inbox":
+        case "inbox":
           state.currentTasks = state.tasks.filter((task: task) => !task.listId);
           break;
         default:
@@ -52,6 +53,9 @@ const tasksSlice = createSlice({
     },
     updateCurrentList(state: taskState, action: updateCurrentListAction) {
       state.currentList = action.payload;
+    },
+    updateCurrentListTitle(state: taskState, action: updateCurrentListAction) {
+      state.currentListTitle = action.payload;
     },
     updateIndexMyDay(state: taskState, action: updateIndexAction) {
       state.tasks[

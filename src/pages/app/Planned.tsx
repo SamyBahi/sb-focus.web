@@ -5,7 +5,8 @@ const Planned = () => {
   const reduxDispatch = useDispatch();
 
   useEffect(() => {
-    reduxDispatch(tasksActions.updateCurrentList("Planned"));
+    reduxDispatch(tasksActions.updateCurrentList("planned"));
+    reduxDispatch(tasksActions.updateCurrentListTitle("Planned"));
   });
 
   return null;

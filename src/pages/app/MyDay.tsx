@@ -6,6 +6,7 @@ const MyDay = () => {
 
   useEffect(() => {
     reduxDispatch(tasksActions.updateCurrentList("myday"));
+    reduxDispatch(tasksActions.updateCurrentListTitle("My Day"));
   });
 
   return null;

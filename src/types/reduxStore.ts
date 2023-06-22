@@ -24,12 +24,12 @@ export interface task {
 export interface taskState {
   tasks: task[];
   currentList: string;
+  currentListTitle: string;
   currentTasks: task[];
 }
 
 export interface menuState {
   showLeftMenu: boolean;
-  showRightMenu: boolean;
 }
 
 export interface setTasksAction extends Action {

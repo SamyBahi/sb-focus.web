@@ -5,7 +5,8 @@ const Important = () => {
   const reduxDispatch = useDispatch();
 
   useEffect(() => {
-    reduxDispatch(tasksActions.updateCurrentList("Important"));
+    reduxDispatch(tasksActions.updateCurrentList("important"));
+    reduxDispatch(tasksActions.updateCurrentListTitle("Important"));
   });
 
   return null;

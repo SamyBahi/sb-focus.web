@@ -3,7 +3,6 @@ import { menuState } from "../../types/reduxStore";
 
 const initialState = {
   showLeftMenu: true,
-  showRightMenu: false,
 };
 
 const menusSlice = createSlice({
@@ -12,9 +11,6 @@ const menusSlice = createSlice({
   reducers: {
     setLeftMenu(state: menuState) {
       state.showLeftMenu = !state.showLeftMenu;
-    },
-    setRightMenu(state: menuState) {
-      state.showRightMenu = !state.showRightMenu;
     },
   },
 });

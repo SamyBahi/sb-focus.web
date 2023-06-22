@@ -14,6 +14,9 @@ const TasksSection = () => {
   const currentList: string = useSelector(
     (state: any) => state.tasks.currentList
   );
+  const currentListTitle: string = useSelector(
+    (state: any) => state.tasks.currentListTitle
+  );
   const completedTasks = tasks.filter((task: any) => task.completed);
 
   useEffect(() => {
@@ -46,7 +49,7 @@ const TasksSection = () => {
             onClick={handleLeftMenuClick}
           />
           <h1 className="text-xl font-bold tracking-wide leading-relaxed">
-            {currentList}
+            {currentListTitle}
           </h1>
         </div>
       </>
