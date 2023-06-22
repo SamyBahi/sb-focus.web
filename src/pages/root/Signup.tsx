@@ -1,4 +1,4 @@
-import { SyntheticEvent, useContext, useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import logo from "../../assets/logo.svg";
 import ButtonPrimary from "../../components/UI/ButtonPrimary";
 import axios from "axios";

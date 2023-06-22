@@ -21,7 +21,7 @@ const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { loading, error, authDispatch } = useContext(AuthContext);
+  const { loading, authDispatch } = useContext(AuthContext);
 
   const submit = async (e: SyntheticEvent) => {
     e.preventDefault();
