@@ -1,5 +1,4 @@
-import { Outlet, useNavigate, useParams } from "react-router-dom";
-import MainFooter from "../../components/MainFooter";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import AppHeader from "../../components/App/Header/AppHeader";

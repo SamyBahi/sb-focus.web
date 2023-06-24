@@ -6,7 +6,7 @@ import {
   BsCalendar3,
   BsHouseDoor,
   BsChevronBarLeft,
-} from "react-icons/bs/index";
+} from "react-icons/bs";
 import { MenusActions } from "../../../store/menusSlice/menusSlice";
 import { task } from "../../../types/reduxStore";
 import { useEffect, useState } from "react";

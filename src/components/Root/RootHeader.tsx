@@ -1,7 +1,7 @@
 import ButtonPrimary from "../UI/ButtonPrimary";
 import ButtonSecondary from "../UI/ButtonSecondary";
 import logo from "../../assets/logo.svg";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const RootHeader = () => {
   const navigate = useNavigate();

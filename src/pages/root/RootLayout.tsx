@@ -3,7 +3,7 @@ import MainFooter from "../../components/MainFooter";
 import RootHeader from "../../components/Root/RootHeader";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 
 const RootLayout = () => {

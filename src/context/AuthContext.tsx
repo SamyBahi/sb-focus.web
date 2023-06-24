@@ -7,7 +7,9 @@ const INITIAL_STATE = {
       : null,
   loading: false,
   error: "",
-  authDispatch: (action: authActions) => {},
+  authDispatch: (action: authActions) => {
+    console.log(action);
+  },
 };
 
 interface authState {
