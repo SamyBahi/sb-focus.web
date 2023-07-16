@@ -65,6 +65,7 @@ const TasksSection = () => {
         }}
       />
       <div className="p-5 h-full overflow-y-auto">
+        {tasks.length === 0 && <h6>Found no tasks.</h6>}
         {currentList.toLowerCase() !== "planned" &&
           currentList.toLowerCase() !== "important" && (
             <TaskList

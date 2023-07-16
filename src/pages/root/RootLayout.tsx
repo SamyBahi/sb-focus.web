@@ -20,6 +20,10 @@ const RootLayout = () => {
   const splitScreenColors =
     location.pathname === "/signup" || location.pathname === "/signin";
 
+  if (user) {
+    return null;
+  }
+
   return (
     <div
       className={`flex flex-col min-h-screen ${

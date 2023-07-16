@@ -23,7 +23,7 @@ const RootHeader = () => {
       <a href="/" className="flex items-center gap-3 cursor-pointer">
         <img src={logo} alt="Logo" className="h-12 md:h-20" />
         <h1 className="text-sm md:text-4xl font-medium antialiased">
-          Smay Focus.
+          SB Focus.
         </h1>
       </a>
       {showButtons && (

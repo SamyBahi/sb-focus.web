@@ -47,7 +47,9 @@ const tasksSlice = createSlice({
           state.currentTasks = state.tasks.filter((task: task) => !task.listId);
           break;
         default:
-          state.currentTasks = state.tasks.filter((task: task) => task.listId);
+          state.currentTasks = state.tasks.filter((task: task) =>
+            task.title.includes(action.payload)
+          );
           break;
       }
     },
