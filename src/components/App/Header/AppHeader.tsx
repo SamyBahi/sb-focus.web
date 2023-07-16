@@ -73,7 +73,7 @@ const AppHeader = () => {
       />
 
       {showDropDown && (
-        <div className="absolute right-5 top-10 mt-2 border-2 bg-white rounded-md shadow-lg overflow-hidden z-20 p-3 w-32">
+        <div className="absolute right-5 top-10 mt-2 border-2 bg-white rounded-md shadow-lg overflow-hidden z-30 p-3 w-32">
           <p className="cursor-pointer text-sm" onClick={handleLogOutClick}>
             Logout
           </p>

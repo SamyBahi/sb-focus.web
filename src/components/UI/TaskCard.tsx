@@ -114,7 +114,8 @@ const TaskCard = (props: taskCardProps) => {
               </p>
               {taskDetails.dueDate && (
                 <p className="flex gap-2 text-xs opacity-80">
-                  <BsCalendar3 /> Due {taskDetails.dueDate}
+                  <BsCalendar3 /> Due{" "}
+                  {new Date(taskDetails.dueDate).toLocaleDateString()}
                 </p>
               )}
             </div>
