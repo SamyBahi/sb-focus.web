@@ -16,7 +16,7 @@ const DeleteTaskForm = () => {
     }
 
     try {
-      await axios.delete("http://localhost:8080/tasks/deleteTask/" + taskId, {
+      await axios.delete("/tasks/deleteTask/" + taskId, {
         withCredentials: true,
       });
       navigate("/app/delete/" + taskId);

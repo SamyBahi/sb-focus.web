@@ -45,7 +45,7 @@ const TaskNoteForm = () => {
 
     try {
       await axios.put(
-        "http://localhost:8080/tasks/putTaskNote/" + taskId,
+        "/tasks/putTaskNote/" + taskId,
         {
           note: content,
         },

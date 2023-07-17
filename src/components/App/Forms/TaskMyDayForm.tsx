@@ -23,7 +23,7 @@ const TaskMyDayForm = () => {
     }
     try {
       await axios.put(
-        "http://localhost:8080/tasks/putTaskMyDay/" + taskId,
+        "/tasks/putTaskMyDay/" + taskId,
         {
           myDay: !taskDetails.myDay,
         },

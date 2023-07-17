@@ -38,7 +38,7 @@ const Signup = () => {
         return;
       }
 
-      await axios.post("http://localhost:8080/auth/signup", userInfo, {
+      await axios.post("/auth/signup", userInfo, {
         withCredentials: true,
       });
       navigate("/signin");

@@ -49,7 +49,7 @@ const AddTaskForm = (props: addTaskProps) => {
       }
 
       const addedTask = await axios.post(
-        "http://localhost:8080/tasks/postTask",
+        "/tasks/postTask",
         {
           title,
           ...props.properties,
@@ -60,7 +60,7 @@ const AddTaskForm = (props: addTaskProps) => {
       await existingTasks.forEach(async (task: any) => {
         if (props.properties.myDay && !props.properties.listId) {
           await axios.put(
-            "http://localhost:8080/tasks/putTaskIndexMyDay/" + task._id,
+            "/tasks/putTaskIndexMyDay/" + task._id,
             { index: task.index.myDay + 1 },
             { withCredentials: true }
           );
@@ -71,7 +71,7 @@ const AddTaskForm = (props: addTaskProps) => {
             })
           );
           await axios.put(
-            "http://localhost:8080/tasks/putTaskIndexList/" + task._id,
+            "/tasks/putTaskIndexList/" + task._id,
             { index: task.index.list + 1 },
             { withCredentials: true }
           );

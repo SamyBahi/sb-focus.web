@@ -44,7 +44,7 @@ const Signin = () => {
       }
 
       const response = await axios.post(
-        "http://localhost:8080/auth/login",
+        "/auth/login",
         { email, password },
         { withCredentials: true }
       );

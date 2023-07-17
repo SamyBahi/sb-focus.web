@@ -25,11 +25,7 @@ const AppHeader = () => {
 
   const handleLogOutClick = async () => {
     try {
-      await axios.post(
-        "http://localhost:8080/auth/logout",
-        {},
-        { withCredentials: true }
-      );
+      await axios.post("/auth/logout", {}, { withCredentials: true });
       authDispatch({ type: "LOGOUT" });
       navigate("/");
     } catch (error: any) {

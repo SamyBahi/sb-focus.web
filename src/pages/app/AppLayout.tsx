@@ -60,12 +60,9 @@ export default AppLayout;
 
 export const AppLoader = async () => {
   try {
-    const response = await axios.get(
-      "http://localhost:8080/tasks/getAllTasks",
-      {
-        withCredentials: true,
-      }
-    );
+    const response = await axios.get("/tasks/getAllTasks", {
+      withCredentials: true,
+    });
     return response.data.tasks;
   } catch (error: any) {
     throw error.response;

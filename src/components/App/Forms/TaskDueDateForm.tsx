@@ -31,7 +31,7 @@ const TaskDueDateForm = () => {
 
     try {
       await axios.put(
-        "http://localhost:8080/tasks/putTaskDueDate/" + taskId,
+        "/tasks/putTaskDueDate/" + taskId,
         { dueDate: dueDate },
         { withCredentials: true }
       );
@@ -59,7 +59,7 @@ const TaskDueDateForm = () => {
     }
     try {
       await axios.put(
-        "http://localhost:8080/tasks/putTaskDueDate/" + taskId,
+        "/tasks/putTaskDueDate/" + taskId,
         { dueDate: null },
         { withCredentials: true }
       );

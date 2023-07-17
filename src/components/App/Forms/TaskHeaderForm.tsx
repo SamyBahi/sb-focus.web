@@ -38,7 +38,7 @@ const TaskHeaderForm = () => {
     }
     try {
       await axios.put(
-        "http://localhost:8080/tasks/putTaskTitle/" + taskId,
+        "/tasks/putTaskTitle/" + taskId,
         { title: taskTitle },
         { withCredentials: true }
       );
@@ -63,7 +63,7 @@ const TaskHeaderForm = () => {
     }
     try {
       await axios.put(
-        "http://localhost:8080/tasks/putTaskCompleted/" + taskId,
+        "/tasks/putTaskCompleted/" + taskId,
         {
           completed: !taskDetails.completed,
         },
@@ -88,7 +88,7 @@ const TaskHeaderForm = () => {
     }
     try {
       await axios.put(
-        "http://localhost:8080/tasks/putTaskImportant/" + taskId,
+        "/tasks/putTaskImportant/" + taskId,
         {
           important: !taskDetails.important,
         },
