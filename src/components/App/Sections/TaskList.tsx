@@ -54,7 +54,7 @@ const TaskList = (props: any) => {
             );
             reduxDispatch(tasksActions.setCurrentTasks(currentList));
             await axios.put(
-              "http://localhost:8080/tasks/putTaskIndexMyDay/" + task._id,
+              "/tasks/putTaskIndexMyDay/" + task._id,
               { index: index + 1 },
               { withCredentials: true }
             );
@@ -67,7 +67,7 @@ const TaskList = (props: any) => {
             );
             reduxDispatch(tasksActions.setCurrentTasks(currentList));
             await axios.put(
-              "http://localhost:8080/tasks/putTaskIndexList/" + task._id,
+              "/tasks/putTaskIndexList/" + task._id,
               { index: index + 1 },
               { withCredentials: true }
             );

@@ -43,7 +43,7 @@ const TaskCard = (props: taskCardProps) => {
   const handleCheckClick = async () => {
     try {
       await axios.put(
-        "http://localhost:8080/tasks/putTaskCompleted/" + props.taskId,
+        "/tasks/putTaskCompleted/" + props.taskId,
         {
           completed: !taskDetails.completed,
         },
@@ -65,7 +65,7 @@ const TaskCard = (props: taskCardProps) => {
   const handleBookmarkClick = async () => {
     try {
       await axios.put(
-        "http://localhost:8080/tasks/putTaskImportant/" + props.taskId,
+        "/tasks/putTaskImportant/" + props.taskId,
         {
           important: !taskDetails.important,
         },
