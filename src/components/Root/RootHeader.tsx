@@ -1,6 +1,5 @@
 import ButtonPrimary from "../UI/ButtonPrimary";
 import ButtonSecondary from "../UI/ButtonSecondary";
-import logo from "../../assets/logo.svg";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const RootHeader = () => {
@@ -21,7 +20,7 @@ const RootHeader = () => {
   return (
     <header className="flex p-4 w-full items-center place-content-between overflow-hidden">
       <a href="/" className="flex items-center gap-3 cursor-pointer">
-        <img src={logo} alt="Logo" className="h-12 md:h-20" />
+        <img src="logo.svg" alt="Logo" className="h-12 md:h-20" />
         <h1 className="text-sm md:text-4xl font-medium antialiased">
           SB Focus.
         </h1>

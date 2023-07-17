@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import illustration from "../../assets/illustration.svg";
 import ButtonPrimary from "../../components/UI/ButtonPrimary";
 
 const Home = () => {
@@ -18,7 +17,7 @@ const Home = () => {
         </div>
       </div>
       <img
-        src={illustration}
+        src="illustration.svg"
         alt="illustration"
         className="basis-3/5 max-w-xs  md:max-w-6xl"
       />

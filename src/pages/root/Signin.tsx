@@ -1,5 +1,4 @@
 import { SyntheticEvent, useContext, useState } from "react";
-import logo from "../../assets/logo.svg";
 import ButtonPrimary from "../../components/UI/ButtonPrimary";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -96,7 +95,7 @@ const Signin = () => {
         </form>
       </div>
       <div className="hidden xl:basis-1/2 xl:flex xl:items-center xl:justify-center">
-        <img src={logo} alt="big logo" className="h-80" />
+        <img src="logo.svg" alt="big logo" className="h-80" />
       </div>
     </div>
   );
