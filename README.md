@@ -1,6 +1,6 @@
 # sb-focus.web
 
-This is the frontend of [sb-focus](https://sbfocus.samybahi.com/signup). A task manager inspired by Microsoft Todo. It is coupled with NodeJS backend REST API that you can find [here](https://github.com/SamyBahi/sb-focus.api).
+This is the frontend of [sb-focus](https://sbfocus.samybahi.com/). A task manager inspired by Microsoft Todo. It is coupled with NodeJS backend REST API that you can find [here](https://github.com/SamyBahi/sb-focus.api).
 
 ## 🚀 Getting started
 
