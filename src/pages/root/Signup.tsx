@@ -95,7 +95,7 @@ const Signup = () => {
         </form>
       </div>
       <div className="hidden xl:basis-1/2 xl:flex xl:items-center xl:justify-center">
-        <img src="logo.svg" alt="big logo" className="h-80" />
+        <img src="/logo.svg" alt="big logo" className="h-80" />
       </div>
     </div>
   );

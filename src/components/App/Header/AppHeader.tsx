@@ -48,7 +48,7 @@ const AppHeader = () => {
   return (
     <header className="flex h-20 p-2 w-full items-center place-content-between border-b-2 border-b-indigo-500">
       <a href="/" className="flex items-center gap-3 cursor-pointer ">
-        <img src="logo.svg" alt="Logo" className="h-5" />
+        <img src="/logo.svg" alt="Logo" className="h-5" />
         <h1 className="text-xl font-medium antialiased">SB Focus.</h1>
       </a>
       <div className="w-1/4">
