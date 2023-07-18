@@ -97,6 +97,7 @@ const TaskDueDateForm = () => {
                   setDueDate(e.target.value);
                 }}
                 onBlur={handleDateBlur}
+                aria-label="date"
               ></input>
             </div>
             <BsX
@@ -115,6 +116,7 @@ const TaskDueDateForm = () => {
                 setDueDate(e.target.value);
               }}
               onBlur={handleDateBlur}
+              aria-label="date"
             ></input>
           </div>
         )}

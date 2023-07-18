@@ -137,6 +137,7 @@ const AddTaskForm = (props: addTaskProps) => {
             onChange={(e) => {
               setDueDate(e.target.value);
             }}
+            aria-label="date"
           ></input>
         </div>
         <div className="flex items-center w-14 text-xs">
