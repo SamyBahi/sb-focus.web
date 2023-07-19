@@ -34,12 +34,12 @@ const TaskNoteForm = () => {
 
   const handleBlur = async () => {
     const div: any = divRef.current;
-    const content = he.encode(div.innerHTML.trim());
+    const content = div.innerHTML.trim();
 
     if (!div || !taskId) {
       return;
     }
-    if (content === "") {
+    if (he.encode(content) === "") {
       setPlaceholderVisible(true);
     }
 

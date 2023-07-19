@@ -4,6 +4,8 @@ import {
   BsCalendar3,
   BsBookmark,
   BsBookmarkFill,
+  BsSticky,
+  BsSun,
 } from "react-icons/bs/";
 import { LuGripVertical } from "react-icons/lu/index";
 import { useSortable } from "@dnd-kit/sortable";
@@ -17,13 +19,16 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { task } from "../../types/reduxStore";
 
 const TaskCard = (props: taskCardProps) => {
   const dispatch = useDispatch();
   const { authDispatch } = useContext(AuthContext);
   const navigate = useNavigate();
-  const currentList = useSelector((state: any) => state.tasks.currentList);
-  const taskDetails = useSelector((state: any) =>
+  const currentList: string = useSelector(
+    (state: any) => state.tasks.currentList
+  );
+  const taskDetails: task = useSelector((state: any) =>
     state.tasks.tasks.find((task: any) => task._id === props.taskId)
   );
   const { attributes, listeners, setNodeRef, transform, transition } =
@@ -112,12 +117,29 @@ const TaskCard = (props: taskCardProps) => {
               <p className={`${taskDetails.completed && "line-through"}`}>
                 {taskDetails.title}
               </p>
-              {taskDetails.dueDate && (
-                <p className="flex gap-2 text-xs opacity-80">
-                  <BsCalendar3 /> Due{" "}
-                  {new Date(taskDetails.dueDate).toLocaleDateString()}
-                </p>
-              )}
+              <div className="flex gap-x-4">
+                {taskDetails.dueDate &&
+                  new Date(taskDetails.dueDate) < new Date() && (
+                    <p className="flex items-center gap-2 text-xs opacity-80 text-red-500">
+                      <BsCalendar3 /> Overdue{" "}
+                      {new Date(taskDetails.dueDate).toLocaleDateString()}
+                    </p>
+                  )}
+                {taskDetails.dueDate &&
+                  new Date(taskDetails.dueDate) > new Date() && (
+                    <p className="flex items-center gap-2 text-xs opacity-80">
+                      <BsCalendar3 /> Due{" "}
+                      {new Date(taskDetails.dueDate).toLocaleDateString()}
+                    </p>
+                  )}
+                {taskDetails.myDay && currentList !== "myday" && (
+                  <p className="flex items-center gap-2 text-xs opacity-80">
+                    <BsSun /> My Day
+                  </p>
+                )}
+                {taskDetails.note && <BsSticky />}
+                {/* {taskDetails.listId} */}
+              </div>
             </div>
           </div>
         </div>
