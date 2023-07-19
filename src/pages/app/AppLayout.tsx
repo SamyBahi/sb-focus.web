@@ -26,7 +26,10 @@ const AppLayout = () => {
     reduxDispatch(tasksActions.setTasks(tasks));
 
     tasks.forEach((task: task) => {
-      if (task.dueDate && new Date(task.dueDate) === new Date()) {
+      if (
+        task.dueDate &&
+        new Date(task.dueDate).toDateString() === new Date().toDateString()
+      ) {
         reduxDispatch(
           tasksActions.updateTaskMyDay({ id: task._id, myDay: true })
         );

@@ -41,6 +41,14 @@ const TaskDueDateForm = () => {
           dueDate: new Date(dueDate).toISOString(),
         })
       );
+      if (new Date(dueDate).toDateString() === new Date().toDateString()) {
+        reduxDispatch(
+          tasksActions.updateTaskMyDay({
+            id: taskId,
+            myDay: true,
+          })
+        );
+      }
       reduxDispatch(tasksActions.setCurrentTasks(currentList));
     } catch (error: any) {
       if (error.response.status === 401) {
