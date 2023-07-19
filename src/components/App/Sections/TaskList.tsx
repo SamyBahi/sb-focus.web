@@ -1,4 +1,12 @@
-import { DndContext, DragEndEvent, closestCenter } from "@dnd-kit/core";
+import {
+  DndContext,
+  DragEndEvent,
+  MouseSensor,
+  TouchSensor,
+  closestCenter,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
 import {
   SortableContext,
   arrayMove,
@@ -35,6 +43,24 @@ const TaskList = (props: any) => {
   }
 
   const taskIds = tasks.map((task: any) => task._id);
+
+  const mouseSensor = useSensor(MouseSensor, {
+    // Require the mouse to move by 10 pixels before activating
+    activationConstraint: {
+      distance: 10,
+    },
+  });
+  const touchSensor = useSensor(TouchSensor, {
+    // Press delay of 250ms, with tolerance of 5px of movement
+    activationConstraint: {
+      delay: 250,
+      tolerance: 5,
+    },
+  });
+
+  const sensors = useSensors(mouseSensor, touchSensor);
+
+  //sensors = useSensor(touchSensor);
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -92,6 +118,7 @@ const TaskList = (props: any) => {
           collisionDetection={closestCenter}
           onDragEnd={handleDragEnd}
           modifiers={[restrictToVerticalAxis, restrictToParentElement]}
+          sensors={sensors}
         >
           <SortableContext
             items={taskIds}
