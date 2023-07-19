@@ -6,7 +6,7 @@ import ListsSection from "../../components/App/Sections/ListsSection";
 import { useDispatch, useSelector } from "react-redux";
 import TasksSection from "../../components/App/Sections/TaskSection";
 import { useLoaderData } from "react-router-dom";
-import { taskState } from "../../types/reduxStore";
+import { task, taskState } from "../../types/reduxStore";
 import axios from "axios";
 import { tasksActions } from "../../store/taskSlice/tasksSlice";
 import { ToastContainer } from "react-toastify";
@@ -24,6 +24,14 @@ const AppLayout = () => {
     }
 
     reduxDispatch(tasksActions.setTasks(tasks));
+
+    tasks.forEach((task: task) => {
+      if (task.dueDate && new Date(task.dueDate) === new Date()) {
+        reduxDispatch(
+          tasksActions.updateTaskMyDay({ id: task._id, myDay: true })
+        );
+      }
+    });
 
     navigate("myday");
   }, [user]);

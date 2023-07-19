@@ -1,8 +1,8 @@
 import { Action } from "@reduxjs/toolkit";
 
 export interface task {
-  _id: String;
-  title: String;
+  _id: string;
+  title: string;
   myDay: boolean;
   important: boolean;
   completed: boolean;
@@ -10,15 +10,15 @@ export interface task {
     myDay: number;
     list: number;
   };
-  userId: String;
+  userId: string;
   steps?: [];
   files?: [];
   createdAt: any;
   updatedAt: any;
   __V: number;
-  listId?: String;
+  listId?: string;
   dueDate?: string | null;
-  note?: String;
+  note?: string;
 }
 
 export interface taskState {
@@ -38,8 +38,8 @@ export interface setTasksAction extends Action {
 
 export interface addTaskAction extends Action {
   payload: {
-    _id: String;
-    title: String;
+    _id: string;
+    title: string;
     myDay: boolean;
     important: boolean;
     completed: boolean;
@@ -47,7 +47,7 @@ export interface addTaskAction extends Action {
       myDay: number;
       list: number;
     };
-    userId: String;
+    userId: string;
     steps: [];
     files: [];
     createdAt: any;
