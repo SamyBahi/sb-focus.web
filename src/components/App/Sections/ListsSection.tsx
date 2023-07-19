@@ -21,10 +21,18 @@ const ListsSection = () => {
   const [amountInbox, setAmountInbox] = useState(0);
 
   useEffect(() => {
-    setAmountMyDay(tasks.filter((task: task) => task.myDay).length);
-    setAmountImportant(tasks.filter((task: task) => task.important).length);
-    setAmountPlanned(tasks.filter((task: task) => task.dueDate).length);
-    setAmountInbox(tasks.filter((task: task) => !task.listId).length);
+    setAmountMyDay(
+      tasks.filter((task: task) => task.myDay && !task.completed).length
+    );
+    setAmountImportant(
+      tasks.filter((task: task) => task.important && !task.completed).length
+    );
+    setAmountPlanned(
+      tasks.filter((task: task) => task.dueDate && !task.completed).length
+    );
+    setAmountInbox(
+      tasks.filter((task: task) => !task.listId && !task.completed).length
+    );
   }, [tasks]);
 
   const handleLeftMenuClick = () => {
