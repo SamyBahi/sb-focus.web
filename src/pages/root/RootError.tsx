@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import MainFooter from "../../components/MainFooter";
 import RootHeader from "../../components/Root/RootHeader";
-import { useRouteError } from "react-router-dom";
+import { useNavigate, useRouteError } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
 const RootError = () => {
   const error: any = useRouteError();
+  const navigate = useNavigate();
   const [content, setContent] = useState(<></>);
   const { authDispatch } = useContext(AuthContext);
 
@@ -22,6 +23,7 @@ const RootError = () => {
           401 error. You are not Authorized to do this operation.
         </h1>
       );
+      navigate("/");
     }
   }, [error]);
 
