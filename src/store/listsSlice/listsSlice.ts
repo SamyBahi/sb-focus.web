@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { listsState } from "../../types/reduxStore";
+import {
+  addCustomListAction,
+  listsState,
+  setCustomListsAction,
+} from "../../types/reduxStore";
 
 const initialState: listsState = {
   baseLists: [
@@ -26,7 +30,14 @@ const initialState: listsState = {
 const listsSlice = createSlice({
   name: "tasks",
   initialState,
-  reducers: {},
+  reducers: {
+    setCustomLists(state: listsState, action: setCustomListsAction) {
+      state.customLists = action.payload.customLists;
+    },
+    addCustomLists(state: listsState, action: addCustomListAction) {
+      state.customLists.push(action.payload.list);
+    },
+  },
 });
 
 export const listsActions = listsSlice.actions;

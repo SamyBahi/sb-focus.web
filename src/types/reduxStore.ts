@@ -1,6 +1,7 @@
 import { Action } from "@reduxjs/toolkit";
 
-export interface task {
+// TaskSlice types
+export type task = {
   _id: string;
   title: string;
   myDay: boolean;
@@ -19,45 +20,14 @@ export interface task {
   listId?: string;
   dueDate?: string | null;
   note?: string;
-}
+};
 
-export interface taskState {
+export type taskState = {
   tasks: task[];
   currentList: string;
   currentListTitle: string;
   currentTasks: task[];
-}
-
-export interface menuState {
-  showLeftMenu: boolean;
-}
-
-export interface listsState {
-  baseLists: [
-    {
-      id: "myday";
-      name: "My Day";
-    },
-    {
-      id: "important";
-      name: "Important";
-    },
-    {
-      id: "planned";
-      name: "Planned";
-    },
-    {
-      id: "inbox";
-      name: "Tasks";
-    }
-  ];
-  customLists: list[];
-}
-
-export interface list {
-  id: string;
-  name: string;
-}
+};
 
 export interface setTasksAction extends Action {
   payload: taskState["tasks"];
@@ -121,6 +91,52 @@ export interface updateTaskDueDateAction extends Action {
   };
 }
 
+// MenusSlice types
+export type menuState = {
+  showLeftMenu: boolean;
+};
+
+// ListsSlices types
+export type listsState = {
+  baseLists: [
+    {
+      id: "myday";
+      name: "My Day";
+    },
+    {
+      id: "important";
+      name: "Important";
+    },
+    {
+      id: "planned";
+      name: "Planned";
+    },
+    {
+      id: "inbox";
+      name: "Tasks";
+    }
+  ];
+  customLists: list[];
+};
+
+export interface setCustomListsAction extends Action {
+  payload: {
+    customLists: list[];
+  };
+}
+
+export interface addCustomListAction extends Action {
+  payload: {
+    list: list;
+  };
+}
+
+export type list = {
+  id: string;
+  name: string;
+};
+
+//general
 export interface actionWithId extends Action {
   payload: {
     id: string;
