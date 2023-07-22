@@ -8,32 +8,13 @@ import {
   BsChevronBarLeft,
 } from "react-icons/bs";
 import { MenusActions } from "../../../store/menusSlice/menusSlice";
-import { task } from "../../../types/reduxStore";
-import { useEffect, useState } from "react";
+import { list, listsState } from "../../../types/reduxStore";
 
 const ListsSection = () => {
   const reduxDispatch = useDispatch();
-  const tasks = useSelector((state: any) => state.tasks.tasks);
+  const lists: listsState = useSelector((state: any) => state.lists);
 
-  const [amountMyDay, setAmountMyDay] = useState(0);
-  const [amountImportant, setAmountImportant] = useState(0);
-  const [amountPlanned, setAmountPlanned] = useState(0);
-  const [amountInbox, setAmountInbox] = useState(0);
-
-  useEffect(() => {
-    setAmountMyDay(
-      tasks.filter((task: task) => task.myDay && !task.completed).length
-    );
-    setAmountImportant(
-      tasks.filter((task: task) => task.important && !task.completed).length
-    );
-    setAmountPlanned(
-      tasks.filter((task: task) => task.dueDate && !task.completed).length
-    );
-    setAmountInbox(
-      tasks.filter((task: task) => !task.listId && !task.completed).length
-    );
-  }, [tasks]);
+  console.log(lists);
 
   const handleLeftMenuClick = () => {
     reduxDispatch(MenusActions.setLeftMenu());
@@ -42,26 +23,16 @@ const ListsSection = () => {
   return (
     <div
       id="taskListSection"
-      className="absolute top-20 h-[calc(100%-5rem)]  z-20 w-72 md:static md:h-auto bg-white drop-shadow-md flex flex-col justify-between"
+      className="absolute top-20 h-[calc(100%-5rem)] w-full  z-20 md:w-96 md:static md:h-auto bg-white drop-shadow-md flex flex-col justify-between"
     >
       <nav>
         <ul className="display flex flex-col">
-          <ListItem link="myday" amount={amountMyDay}>
-            <BsSun className="text-lg" />
-            My Day
-          </ListItem>
-          <ListItem link="important" amount={amountImportant}>
-            <BsBookmark className="text-lg" />
-            Important
-          </ListItem>
-          <ListItem link="planned" amount={amountPlanned}>
-            <BsCalendar3 className="text-lg" />
-            Planned
-          </ListItem>
-          <ListItem link="inbox" amount={amountInbox}>
-            <BsHouseDoor className="text-lg" />
-            Tasks
-          </ListItem>
+          {lists.baseLists.map((list: list) => (
+            <ListItem link={list.id} name={list.name} key={list.id} />
+          ))}
+          <li>
+            <hr className="w-4/5 mx-auto mt-3 border-indigo-300" />
+          </li>
         </ul>
       </nav>
       <div className="flex justify-end p-3 items-center">

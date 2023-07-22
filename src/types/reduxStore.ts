@@ -32,6 +32,33 @@ export interface menuState {
   showLeftMenu: boolean;
 }
 
+export interface listsState {
+  baseLists: [
+    {
+      id: "myday";
+      name: "My Day";
+    },
+    {
+      id: "important";
+      name: "Important";
+    },
+    {
+      id: "planned";
+      name: "Planned";
+    },
+    {
+      id: "inbox";
+      name: "Tasks";
+    }
+  ];
+  customLists: list[];
+}
+
+export interface list {
+  id: string;
+  name: string;
+}
+
 export interface setTasksAction extends Action {
   payload: taskState["tasks"];
 }
