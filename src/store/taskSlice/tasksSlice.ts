@@ -11,6 +11,7 @@ import {
   task,
   updateTaskDueDateAction,
   updateTaskNoteAction,
+  searchTaskAction,
 } from "../../types/reduxStore";
 
 const initialState = {
@@ -52,6 +53,11 @@ const tasksSlice = createSlice({
           );
           break;
       }
+    },
+    searchTask(state: taskState, action: searchTaskAction) {
+      state.currentTasks = state.tasks.filter((task: task) =>
+        task.title.toLowerCase().includes(action.payload.toLocaleLowerCase())
+      );
     },
     updateCurrentList(state: taskState, action: updateCurrentListAction) {
       state.currentList = action.payload;

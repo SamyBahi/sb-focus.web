@@ -37,12 +37,12 @@ const AppHeader = () => {
 
   useEffect(() => {
     if (searchValue !== "") {
-      reduxDispatch(tasksActions.setCurrentTasks(searchValue));
+      reduxDispatch(tasksActions.searchTask(searchValue));
+      return;
+    } else {
+      reduxDispatch(tasksActions.setCurrentTasks(currentList));
       return;
     }
-
-    reduxDispatch(tasksActions.setCurrentTasks(currentList));
-    return;
   }, [searchValue]);
 
   return (

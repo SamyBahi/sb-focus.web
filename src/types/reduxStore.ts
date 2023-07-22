@@ -57,6 +57,10 @@ export interface updateCurrentListAction extends Action {
   payload: string;
 }
 
+export interface searchTaskAction extends Action {
+  payload: string;
+}
+
 export interface updateIndexAction extends Action {
   payload: {
     id: string;
