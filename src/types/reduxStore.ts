@@ -101,19 +101,19 @@ export type listsState = {
   baseLists: [
     {
       id: "myday";
-      name: "My Day";
+      title: "My Day";
     },
     {
       id: "important";
-      name: "Important";
+      title: "Important";
     },
     {
       id: "planned";
-      name: "Planned";
+      title: "Planned";
     },
     {
       id: "inbox";
-      name: "Tasks";
+      title: "Tasks";
     }
   ];
   customLists: list[];
@@ -133,7 +133,7 @@ export interface addCustomListAction extends Action {
 
 export type list = {
   id: string;
-  name: string;
+  title: string;
 };
 
 //general

@@ -35,5 +35,5 @@ export interface buttonProps
 
 export interface listItemProps extends PropsWithChildren {
   link: To;
-  name: string;
+  title: string;
 }

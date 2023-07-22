@@ -13,7 +13,7 @@ const Delete = () => {
       reduxDispatch(tasksActions.deleteTask({ id: taskId }));
       navigate("/app/" + currentList.toLowerCase());
     }
-  });
+  }, []);
 
   return null;
 };

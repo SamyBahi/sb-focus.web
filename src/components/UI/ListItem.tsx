@@ -3,12 +3,20 @@ import { listItemProps } from "../../types/componentProps";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { task } from "../../types/reduxStore";
+import {
+  BsSun,
+  BsBookmark,
+  BsCalendar3,
+  BsHouseDoor,
+  BsListUl,
+} from "react-icons/bs";
 
 const ListItem = (props: listItemProps) => {
   const currentList = useSelector((state: any) => state.tasks.currentList);
   const tasks = useSelector((state: any) => state.tasks.tasks);
 
   const [amount, setAmount] = useState(0);
+  const [icon, setIcon] = useState(<BsListUl />);
 
   useEffect(() => {
     switch (props.link.toString()) {
@@ -16,21 +24,25 @@ const ListItem = (props: listItemProps) => {
         setAmount(
           tasks.filter((task: task) => task.myDay && !task.completed).length
         );
+        setIcon(<BsSun />);
         break;
       case "important":
         setAmount(
           tasks.filter((task: task) => task.important && !task.completed).length
         );
+        setIcon(<BsBookmark />);
         break;
       case "planned":
         setAmount(
           tasks.filter((task: task) => task.dueDate && !task.completed).length
         );
+        setIcon(<BsCalendar3 />);
         break;
       case "inbox":
         setAmount(
           tasks.filter((task: task) => !task.listId && !task.completed).length
         );
+        setIcon(<BsHouseDoor />);
         break;
       default:
         setAmount(
@@ -41,7 +53,7 @@ const ListItem = (props: listItemProps) => {
         );
         break;
     }
-  }, [tasks]);
+  }, [tasks, props.link]);
 
   return (
     <Link to={props.link}>
@@ -53,8 +65,11 @@ const ListItem = (props: listItemProps) => {
         }`}
       >
         <div className="flex justify-between items-center">
-          <div className="flex gap-4 items-center">{props.name}</div>
-          <span className="text-sm">{amount}</span>
+          <div className="flex gap-4 items-center">
+            {icon}
+            {props.title}
+          </div>
+          <span className="text-sm text-[#404040] opacity-50">{amount}</span>
         </div>
       </li>
     </Link>

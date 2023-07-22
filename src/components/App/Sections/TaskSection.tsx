@@ -62,6 +62,7 @@ const TasksSection = () => {
         properties={{
           myDay: currentList.toLowerCase() === "myday" ? true : false,
           important: currentList.toLowerCase() === "important" ? true : false,
+          listId: currentList.toLowerCase() || undefined,
         }}
       />
       <div className="p-5 h-full overflow-y-auto">

@@ -16,7 +16,7 @@ const TaskSchema = z.object({
 type Task = z.infer<typeof TaskSchema>;
 
 const AddTaskForm = (props: addTaskProps) => {
-  const tasksDispatch = useDispatch();
+  const reduxDispatch = useDispatch();
   const { authDispatch } = useContext(AuthContext);
   const existingTasks = useSelector((state: any) => state.tasks.currentTasks);
   const currentList: string = useSelector(
@@ -64,7 +64,7 @@ const AddTaskForm = (props: addTaskProps) => {
             { index: task.index.myDay + 1 },
             { withCredentials: true }
           );
-          tasksDispatch(
+          reduxDispatch(
             tasksActions.updateIndexMyDay({
               id: task._id,
               newIndex: task.index.myDay + 1,
@@ -75,28 +75,28 @@ const AddTaskForm = (props: addTaskProps) => {
             { index: task.index.list + 1 },
             { withCredentials: true }
           );
-          tasksDispatch(
+          reduxDispatch(
             tasksActions.updateIndexList({
               id: task._id,
               newIndex: task.index.list + 1,
             })
           );
         } else {
-          // await axios.put(
-          //   "http://localhost:8080/tasks/putTaskIndexList/" + task._id,
-          //   { index: task.index.list + 1 },
-          //   { withCredentials: true }
-          // );
-          // tasksDispatch(
-          //   tasksActions.updateIndexList({
-          //     id: task._id,
-          //     newIndex: task.index.list + 1,
-          //   })
-          // );
+          await axios.put(
+            "/tasks/putTaskIndexList/" + task._id,
+            { index: task.index.list + 1 },
+            { withCredentials: true }
+          );
+          reduxDispatch(
+            tasksActions.updateIndexList({
+              id: task._id,
+              newIndex: task.index.list + 1,
+            })
+          );
         }
       });
-      tasksDispatch(tasksActions.addTask(addedTask.data.task));
-      tasksDispatch(tasksActions.setCurrentTasks(currentList));
+      reduxDispatch(tasksActions.addTask(addedTask.data.task));
+      reduxDispatch(tasksActions.setCurrentTasks(currentList));
       setTitle("");
     } catch (error: any) {
       if (error.response.status === 401) {

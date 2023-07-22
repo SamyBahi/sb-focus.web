@@ -7,7 +7,7 @@ const Inbox = () => {
   useEffect(() => {
     reduxDispatch(tasksActions.updateCurrentList("inbox"));
     reduxDispatch(tasksActions.updateCurrentListTitle("Tasks"));
-  });
+  }, []);
 
   return null;
 };

@@ -9,19 +9,19 @@ const initialState: listsState = {
   baseLists: [
     {
       id: "myday",
-      name: "My Day",
+      title: "My Day",
     },
     {
       id: "important",
-      name: "Important",
+      title: "Important",
     },
     {
       id: "planned",
-      name: "Planned",
+      title: "Planned",
     },
     {
       id: "inbox",
-      name: "Tasks",
+      title: "Tasks",
     },
   ],
   customLists: [],
