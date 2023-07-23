@@ -19,12 +19,13 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { task } from "../../types/reduxStore";
+import { list, listsState, task } from "../../types/reduxStore";
 
 const TaskCard = (props: taskCardProps) => {
   const dispatch = useDispatch();
   const { authDispatch } = useContext(AuthContext);
   const navigate = useNavigate();
+  const lists: listsState = useSelector((state: any) => state.lists);
   const currentList: string = useSelector(
     (state: any) => state.tasks.currentList
   );
@@ -139,8 +140,18 @@ const TaskCard = (props: taskCardProps) => {
                     <BsSun /> My Day
                   </p>
                 )}
+                {taskDetails.listId && currentList !== taskDetails.listId && (
+                  <p className="flex items-center gap-2 text-xs opacity-80">
+                    {
+                      lists.customLists[
+                        lists.customLists
+                          .map((list: list) => list.id)
+                          .indexOf(taskDetails.listId)
+                      ].title
+                    }
+                  </p>
+                )}
                 {taskDetails.note && <BsSticky />}
-                {/* {taskDetails.listId} */}
               </div>
             </div>
           </div>

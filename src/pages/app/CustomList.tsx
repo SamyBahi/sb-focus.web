@@ -30,7 +30,7 @@ const CustomList = () => {
         ].title
       )
     );
-  }, []);
+  }, [currentListId]);
 
   return null;
 };

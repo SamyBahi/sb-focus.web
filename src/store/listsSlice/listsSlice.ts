@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  actionWithId,
   addCustomListAction,
+  list,
   listsState,
   setCustomListsAction,
   updateListTitleAction,
@@ -42,6 +44,11 @@ const listsSlice = createSlice({
       state.customLists[
         state.customLists.map((list) => list.id).indexOf(action.payload.id)
       ].title = action.payload.title;
+    },
+    deleteLists(state: listsState, action: actionWithId) {
+      state.customLists = state.customLists.filter(
+        (list: list) => list.id !== action.payload.id
+      );
     },
   },
 });

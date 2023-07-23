@@ -20,6 +20,7 @@ import Delete from "./pages/app/Delete";
 import RootError from "./pages/root/RootError";
 import axios from "axios";
 import CustomList from "./pages/app/CustomList";
+import DeleteList from "./pages/app/DeleteList";
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
@@ -48,6 +49,7 @@ const router = createBrowserRouter([
       { path: "id/:taskId", element: <TaskDetails /> },
       { path: "delete/:taskId", element: <Delete /> },
       { path: ":listId", element: <CustomList /> },
+      { path: "deleteList/:listId", element: <DeleteList /> },
     ],
   },
 ]);

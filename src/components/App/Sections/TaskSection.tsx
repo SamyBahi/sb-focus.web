@@ -1,4 +1,4 @@
-import { BsList } from "react-icons/bs";
+import { BsList, BsTrash } from "react-icons/bs";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,12 +10,14 @@ import { list, listsState } from "../../../types/reduxStore";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { listsActions } from "../../../store/listsSlice/listsSlice";
+import { useNavigate } from "react-router-dom";
 
 const TasksSection = () => {
   const reduxDispatch = useDispatch();
   const { authDispatch } = useContext(AuthContext);
   const { user } = useContext(AuthContext);
   const tasks = useSelector((state: any) => state.tasks.currentTasks);
+  const navigate = useNavigate();
   const currentList: string = useSelector(
     (state: any) => state.tasks.currentList
   );
@@ -59,6 +61,23 @@ const TasksSection = () => {
     }
   };
 
+  const handleDeleteListClick = async () => {
+    try {
+      await axios.delete("/lists/deleteList/" + currentList, {
+        withCredentials: true,
+      });
+      navigate("/app/deleteList/" + currentList);
+    } catch (error: any) {
+      if (error.response.status === 401) {
+        return authDispatch({ type: "LOGOUT" });
+      }
+      toast.error(
+        error.response.status +
+          " Something went wrong ! Please try again later."
+      );
+    }
+  };
+
   const listTitleContent =
     currentList.toLowerCase() === "myday" ? (
       <>
@@ -75,29 +94,43 @@ const TasksSection = () => {
       </>
     ) : (
       <>
-        <div className="flex items-center m-5">
-          <BsList
-            className="text-2xl cursor-pointer mr-3"
-            onClick={handleLeftMenuClick}
-          />
+        <div className="flex items-center m-5 justify-between">
           {lists.customLists
             .map((list: list) => list.id)
             .includes(currentList) ? (
-            <input
-              type="text"
-              className="text-xl font-bold tracking-wide leading-relaxed bg-transparent focus:outline-none"
-              value={currentListTitle}
-              onChange={(e) =>
-                reduxDispatch(
-                  tasksActions.updateCurrentListTitle(e.target.value)
-                )
-              }
-              onBlur={handleListTitleBlur}
-            />
+            <>
+              <div className="flex items-center">
+                <BsList
+                  className="text-2xl cursor-pointer mr-3"
+                  onClick={handleLeftMenuClick}
+                />
+                <input
+                  type="text"
+                  className="text-xl font-bold tracking-wide leading-relaxed bg-transparent focus:outline-none"
+                  value={currentListTitle}
+                  onChange={(e) =>
+                    reduxDispatch(
+                      tasksActions.updateCurrentListTitle(e.target.value)
+                    )
+                  }
+                  onBlur={handleListTitleBlur}
+                />
+              </div>
+              <BsTrash
+                className="text-lg cursor-pointer"
+                onClick={handleDeleteListClick}
+              />
+            </>
           ) : (
-            <h1 className="text-xl font-bold tracking-wide leading-relaxed">
-              {currentListTitle}
-            </h1>
+            <div className="flex items-center">
+              <BsList
+                className="text-2xl cursor-pointer mr-3"
+                onClick={handleLeftMenuClick}
+              />
+              <h1 className="text-xl font-bold tracking-wide leading-relaxed">
+                {currentListTitle}
+              </h1>
+            </div>
           )}
         </div>
       </>
