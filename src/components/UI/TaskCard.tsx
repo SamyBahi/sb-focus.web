@@ -94,6 +94,10 @@ const TaskCard = (props: taskCardProps) => {
     navigate("id/" + props.taskId);
   };
 
+  if (taskDetails.dueDate) {
+    console.log(new Date(taskDetails.dueDate) < new Date());
+  }
+
   return (
     <div ref={setNodeRef} style={style}>
       <div className="flex h-12 bg-white mt-2 mx-5 rounded-md drop-shadow-md items-center justify-between">
@@ -120,16 +124,14 @@ const TaskCard = (props: taskCardProps) => {
               </p>
               <div className="flex gap-x-4">
                 {taskDetails.dueDate &&
-                  new Date(taskDetails.dueDate).toDateString() <
-                    new Date().toDateString() && (
+                  new Date(taskDetails.dueDate) < new Date() && (
                     <p className="flex items-center gap-2 text-xs opacity-80 text-red-500">
                       <BsCalendar3 /> Overdue{" "}
                       {new Date(taskDetails.dueDate).toLocaleDateString()}
                     </p>
                   )}
                 {taskDetails.dueDate &&
-                  new Date(taskDetails.dueDate).toDateString() >=
-                    new Date().toDateString() && (
+                  new Date(taskDetails.dueDate) >= new Date() && (
                     <p className="flex items-center gap-2 text-xs opacity-80">
                       <BsCalendar3 /> Due{" "}
                       {new Date(taskDetails.dueDate).toLocaleDateString()}
