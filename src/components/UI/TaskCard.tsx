@@ -142,13 +142,16 @@ const TaskCard = (props: taskCardProps) => {
                 )}
                 {taskDetails.listId && currentList !== taskDetails.listId && (
                   <p className="flex items-center gap-2 text-xs opacity-80">
-                    {
+                    {lists.customLists[
+                      lists.customLists
+                        .map((list: list) => list.id)
+                        .indexOf(taskDetails.listId)
+                    ].title &&
                       lists.customLists[
                         lists.customLists
                           .map((list: list) => list.id)
                           .indexOf(taskDetails.listId)
-                      ].title
-                    }
+                      ].title}
                   </p>
                 )}
                 {taskDetails.note && <BsSticky />}
