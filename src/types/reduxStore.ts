@@ -135,6 +135,13 @@ export interface addCustomListAction extends Action {
   };
 }
 
+export interface updateListTitleAction extends Action {
+  payload: {
+    id: string;
+    title: string;
+  };
+}
+
 export type list = {
   id: string;
   title: string;

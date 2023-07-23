@@ -3,6 +3,7 @@ import {
   addCustomListAction,
   listsState,
   setCustomListsAction,
+  updateListTitleAction,
 } from "../../types/reduxStore";
 
 const initialState: listsState = {
@@ -36,6 +37,11 @@ const listsSlice = createSlice({
     },
     addCustomLists(state: listsState, action: addCustomListAction) {
       state.customLists.push(action.payload.list);
+    },
+    updateListTitle(state: listsState, action: updateListTitleAction) {
+      state.customLists[
+        state.customLists.map((list) => list.id).indexOf(action.payload.id)
+      ].title = action.payload.title;
     },
   },
 });

@@ -6,9 +6,14 @@ import AddTaskForm from "../Forms/AddTaskForm";
 import TaskList from "./TaskList";
 import { MenusActions } from "../../../store/menusSlice/menusSlice";
 import { tasksActions } from "../../../store/taskSlice/tasksSlice";
+import { list, listsState } from "../../../types/reduxStore";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { listsActions } from "../../../store/listsSlice/listsSlice";
 
 const TasksSection = () => {
   const reduxDispatch = useDispatch();
+  const { authDispatch } = useContext(AuthContext);
   const { user } = useContext(AuthContext);
   const tasks = useSelector((state: any) => state.tasks.currentTasks);
   const currentList: string = useSelector(
@@ -18,6 +23,7 @@ const TasksSection = () => {
     (state: any) => state.tasks.currentListTitle
   );
   const completedTasks = tasks.filter((task: any) => task.completed);
+  const lists: listsState = useSelector((state: any) => state.lists);
 
   useEffect(() => {
     reduxDispatch(tasksActions.setCurrentTasks(currentList));
@@ -25,6 +31,32 @@ const TasksSection = () => {
 
   const handleLeftMenuClick = () => {
     reduxDispatch(MenusActions.setLeftMenu());
+  };
+
+  const handleListTitleBlur = async () => {
+    try {
+      await axios.put(
+        "/lists/putList/" + currentList,
+        {
+          title: currentListTitle,
+        },
+        { withCredentials: true }
+      );
+      reduxDispatch(
+        listsActions.updateListTitle({
+          id: currentList,
+          title: currentListTitle,
+        })
+      );
+    } catch (error: any) {
+      if (error.response.status === 401) {
+        return authDispatch({ type: "LOGOUT" });
+      }
+      toast.error(
+        error.response.status +
+          " Something went wrong ! Please try again later."
+      );
+    }
   };
 
   const listTitleContent =
@@ -48,9 +80,25 @@ const TasksSection = () => {
             className="text-2xl cursor-pointer mr-3"
             onClick={handleLeftMenuClick}
           />
-          <h1 className="text-xl font-bold tracking-wide leading-relaxed">
-            {currentListTitle}
-          </h1>
+          {lists.customLists
+            .map((list: list) => list.id)
+            .includes(currentList) ? (
+            <input
+              type="text"
+              className="text-xl font-bold tracking-wide leading-relaxed bg-transparent focus:outline-none"
+              value={currentListTitle}
+              onChange={(e) =>
+                reduxDispatch(
+                  tasksActions.updateCurrentListTitle(e.target.value)
+                )
+              }
+              onBlur={handleListTitleBlur}
+            />
+          ) : (
+            <h1 className="text-xl font-bold tracking-wide leading-relaxed">
+              {currentListTitle}
+            </h1>
+          )}
         </div>
       </>
     );
