@@ -29,6 +29,17 @@ const TaskMyDayForm = () => {
         },
         { withCredentials: true }
       );
+      await axios.put(
+        "/tasks/putTaskIndexMyDay/" + taskId,
+        { index: 1 },
+        { withCredentials: true }
+      );
+      reduxDispatch(
+        tasksActions.updateIndexMyDay({
+          id: taskId,
+          newIndex: 1,
+        })
+      );
       reduxDispatch(
         tasksActions.updateTaskMyDay({ id: taskId, myDay: !taskDetails.myDay })
       );
