@@ -94,10 +94,6 @@ const TaskCard = (props: taskCardProps) => {
     navigate("id/" + props.taskId);
   };
 
-  if (taskDetails.dueDate) {
-    console.log(new Date(taskDetails.dueDate) < new Date());
-  }
-
   return (
     <div ref={setNodeRef} style={style}>
       <div className="flex h-12 bg-white mt-2 mx-5 rounded-md drop-shadow-md items-center justify-between">
