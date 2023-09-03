@@ -69,6 +69,9 @@ const Signin = () => {
         >
           <div className="w-3/4 md:w-1/3">
             <label htmlFor="email">Email</label>
+            <p className="opacity-50 text-xs">
+              Demo account : demouser@demo.com
+            </p>
             <BaseInput
               type="text"
               placeholder="Enter your email"
@@ -78,6 +81,7 @@ const Signin = () => {
           </div>
           <div className="w-3/4 md:w-1/3">
             <label htmlFor="email">Password</label>
+            <p className="opacity-50 text-xs">Demo password : demopassword</p>
             <BaseInput
               type="password"
               placeholder="Enter your password"
